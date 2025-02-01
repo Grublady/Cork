@@ -41784,6 +41784,17 @@
         }
       }
     },
+    "settings.install-uninstall.installation.automatically-accept-eulas" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatically accept package EULAs"
+          }
+        }
+      }
+    },
     "settings.install-uninstall.installation.enable-automatic-cleanup" : {
       "localizations" : {
         "cs" : {
