@@ -134,7 +134,7 @@ struct AddFormulaView: View
                         AnotherProcessAlreadyRunningView()
 
                     case .installationTerminatedUnexpectedly:
-                        InstallationTerminatedUnexpectedlyView(terminalOutputOfTheInstallation: installationProgressTracker.packageBeingInstalled.realTimeTerminalOutput)
+                        InstallationTerminatedUnexpectedlyView(terminalOutputOfTheInstallation: installationProgressTracker.output)
                     }
                 }
                 .navigationTitle(sheetTitle)

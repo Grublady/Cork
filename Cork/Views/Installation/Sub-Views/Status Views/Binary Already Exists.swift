@@ -24,7 +24,7 @@ struct BinaryAlreadyExistsView: View, Sendable
             VStack(alignment: .leading, spacing: 10)
             {
                 HeadlineWithSubheadline(
-                    headline: "add-package.install.binary-already-exists-\(installationProgressTracker.packageBeingInstalled.package.name)",
+                    headline: "add-package.install.binary-already-exists-\(installationProgressTracker.package.name)",
                     subheadline: "add-package.install.binary-already-exists.subheadline",
                     alignment: .leading
                 )

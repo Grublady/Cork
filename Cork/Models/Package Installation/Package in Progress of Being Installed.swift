@@ -18,7 +18,7 @@ struct PackageInProgressOfBeingInstalled: Identifiable
     let id: UUID = .init()
 
     let package: BrewPackage
-    var installationStage: BrewInstallationStage
+    var installationStage: InstallationStage
     var packageInstallationProgress: Double
 
     var realTimeTerminalOutput: [RealTimeTerminalLine] = .init()

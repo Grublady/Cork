@@ -125,9 +125,10 @@ struct InstallationInitialView: View
                 return
             }
             
-            installationProgressTracker.packageBeingInstalled = PackageInProgressOfBeingInstalled(package: packageToInstall, installationStage: .ready, packageInstallationProgress: 0)
+            installationProgressTracker.package = packageToInstall
+            installationProgressTracker.stage = .common(.ready)
             
-            AppConstants.shared.logger.debug("Packages to install: \(installationProgressTracker.packageBeingInstalled.package.name, privacy: .public)")
+            AppConstants.shared.logger.debug("Packages to install: \(installationProgressTracker.package.name, privacy: .public)")
             
             packageInstallationProcessStep = .installing
             

@@ -24,7 +24,7 @@ struct WrongArchitectureView: View, Sendable
             {
                 HeadlineWithSubheadline(
                     headline: "add-package.install.wrong-architecture.title",
-                    subheadline: "add-package.install.wrong-architecture-\(installationProgressTracker.packageBeingInstalled.package.name).user-architecture-is-\(ProcessInfo().CPUArchitecture == .arm ? "Apple Silicon" : "Intel")",
+                    subheadline: "add-package.install.wrong-architecture-\(installationProgressTracker.package.name).user-architecture-is-\(ProcessInfo().CPUArchitecture == .arm ? "Apple Silicon" : "Intel")",
                     alignment: .leading
                 )
             }

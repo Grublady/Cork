@@ -127,10 +127,11 @@ struct PresentingSearchResultsView: View
             {
                 let packageToInstall: BrewPackage = try foundPackageSelection.getPackage(tracker: searchResultTracker)
 
-                installationProgressTracker.packageBeingInstalled = PackageInProgressOfBeingInstalled(package: packageToInstall, installationStage: .ready, packageInstallationProgress: 0)
+                installationProgressTracker.package = packageToInstall
+                installationProgressTracker.stage = .common(.ready)
 
                 #if DEBUG
-                    AppConstants.shared.logger.info("Packages to install: \(installationProgressTracker.packageBeingInstalled.package.name, privacy: .public)")
+                    AppConstants.shared.logger.info("Packages to install: \(installationProgressTracker.package.name, privacy: .public)")
                 #endif
             }
             catch let packageByUUIDRetrievalError

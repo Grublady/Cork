@@ -7411,6 +7411,7 @@
       }
     },
     "add-package.install.calculating-dependencies" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
