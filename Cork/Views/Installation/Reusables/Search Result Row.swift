@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SearchResultRow: View, Sendable
 {
+    @Binding var versionSelections: [String: String]
     @AppStorage("showDescriptionsInSearchResults") var showDescriptionsInSearchResults: Bool = false
     @AppStorage("showCompatibilityWarning") var showCompatibilityWarning: Bool = true
 
@@ -243,7 +244,7 @@ struct SearchResultRow: View, Sendable
                 }
             }
         }
-        .tag(AddFormulaView.PackageSelectedToBeInstalled(package: searchedForPackage, version: selectedVersion.isEmpty ? nil : selectedVersion))
+        .tag(AddFormulaView.PackageSelectedToBeInstalled(package: searchedForPackage/*, version: selectedVersion.isEmpty ? nil : selectedVersion*/))
         .task
         {
             if showDescriptionsInSearchResults
@@ -283,6 +284,15 @@ struct SearchResultRow: View, Sendable
                 {
                     AppConstants.shared.logger.info("\(searchedForPackage.name, privacy: .auto) already has its description loaded")
                 }
+            }
+        }
+        .modify{
+            if #available(iOS 14.0, macOS 14.0, tvOS 14.0, *) {
+                $0.onChange(of: selectedVersion){
+                    versionSelections[searchedForPackage.name] = selectedVersion
+                }
+            } else {
+                $0
             }
         }
     }

@@ -10,6 +10,7 @@ import CorkShared
 
 struct InstallationInitialView: View
 {
+    @State var versionSelections: [String: String] = [:]
     @Environment(\.dismiss) var dismiss: DismissAction
     @Environment(\.openWindow) var openWindow: OpenWindowAction
 
@@ -47,9 +48,9 @@ struct InstallationInitialView: View
                 {
                     List(selection: $foundPackageSelection)
                     {
-                        TopPackagesSection(packageTracker: topPackagesTracker, trackerType: .formula)
+                        TopPackagesSection(versionSelections: $versionSelections, packageTracker: topPackagesTracker, trackerType: .formula)
 
-                        TopPackagesSection(packageTracker: topPackagesTracker, trackerType: .cask)
+                        TopPackagesSection(versionSelections: $versionSelections, packageTracker: topPackagesTracker, trackerType: .cask)
                     }
                     .listStyle(.bordered(alternatesRowBackgrounds: true))
                     .frame(minHeight: 200)
@@ -118,12 +119,13 @@ struct InstallationInitialView: View
     {
         Button
         {
-            guard let packageToInstall: BrewPackage = foundPackageSelection?.constructPackageOfRelevantVersion() else
+            guard var packageToInstall: BrewPackage = foundPackageSelection?.constructPackageOfRelevantVersion() else
             {
                 AppConstants.shared.logger.error("Could not retrieve top package to install")
                 
                 return
             }
+            packageToInstall.homebrewVersion = versionSelections[packageToInstall.name] ?? packageToInstall.homebrewVersion
             
             AppConstants.shared.logger.debug("Packages to install: \(packageToInstall.name, privacy: .public)")
             

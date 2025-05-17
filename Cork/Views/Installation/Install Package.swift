@@ -18,11 +18,11 @@ struct AddFormulaView: View
         
         var package: BrewPackage?
         
-        var version: String?
+//        var version: String?
         
         init(package: BrewPackage? = nil, version: String? = nil) {
             self.package = package
-            self.version = version
+//            self.version = version
             
             if let package
             {
@@ -49,19 +49,19 @@ struct AddFormulaView: View
             }
             
             /// Now that we have a package, let's see if there's a specific Homebrew version selected
-            if let selectedHomebrewVersion = self.version
-            {
-                /// If there is a version defined, construct a package that's identical, apart from its Homebrew version
-                newPackage.versions = .init()
-                newPackage.homebrewVersion = selectedHomebrewVersion
-                
-                return newPackage
-            }
-            else
-            {
+//            if let selectedHomebrewVersion = self.version
+//            {
+//                /// If there is a version defined, construct a package that's identical, apart from its Homebrew version
+//                newPackage.versions = .init()
+//                newPackage.homebrewVersion = selectedHomebrewVersion
+//                
+//                return newPackage
+//            }
+//            else
+//            {
                 /// If there's no Homebrew version defined, just return the package itself with no versions
                 return newPackage
-            }
+//            }
         }
     }
     
@@ -159,7 +159,7 @@ struct AddFormulaView: View
             SheetTemplate(isShowingTitle: shouldShowSheetTitle)
             {
 #if DEBUG
-                        Text("\(foundPackageSelection?.package?.name ?? "nil"): \(foundPackageSelection?.version ?? "nil")")
+                        Text("\(foundPackageSelection?.package?.name ?? "nil"): \(/*foundPackageSelection?.version ?? */"nil")")
 #endif
                 Group
                 {

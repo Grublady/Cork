@@ -412,14 +412,14 @@ struct CorkApp: App
             let previewWindowName: String = {
                 if let packageName = packageToPreview?.package?.name
                 {
-                    if let packageHomebrewVersion = packageToPreview?.version
-                    {
-                        return "\(packageName)􀎠\(packageHomebrewVersion)"
-                    }
-                    else
-                    {
+//                    if let packageHomebrewVersion = packageToPreview?.version
+//                    {
+//                        return "\(packageName)􀎠\(packageHomebrewVersion)"
+//                    }
+//                    else
+//                    {
                         return packageName
-                    }
+//                    }
                 }
                 else
                 {

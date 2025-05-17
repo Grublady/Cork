@@ -11,6 +11,7 @@ import SwiftUI
 
 struct PresentingSearchResultsView: View
 {
+    @State var versionSelections: [String: String] = [:]
     enum PackageInstallationInitializationError: Error
     {
         case couldNotStartInstallProcessWithPackage(package: BrewPackage?)
@@ -60,11 +61,13 @@ struct PresentingSearchResultsView: View
                 else
                 {
                     SearchResultsSection(
+                        versionSelections: $versionSelections,
                         sectionType: .formula,
                         packageList: searchResultTracker.foundFormulae
                     )
 
                     SearchResultsSection(
+                        versionSelections: $versionSelections,
                         sectionType: .cask,
                         packageList: searchResultTracker.foundCasks
                     )
@@ -161,11 +164,12 @@ struct PresentingSearchResultsView: View
         // This has to be an AsyncButton so it shakes
         AsyncButton
         {
-            guard let packageToInstall = foundPackageSelection?.constructPackageOfRelevantVersion()
+            guard var packageToInstall = foundPackageSelection?.constructPackageOfRelevantVersion()
             else
             {
                 throw PackageInstallationInitializationError.couldNotStartInstallProcessWithPackage(package: nil)
             }
+            packageToInstall.homebrewVersion = versionSelections[packageToInstall.name] ?? packageToInstall.homebrewVersion
 
             packageInstallationProcessStep = .installing(packageToInstall: packageToInstall)
         } label: {
@@ -190,6 +194,7 @@ struct PresentingSearchResultsView: View
 
 private struct SearchResultsSection: View
 {
+    @Binding var versionSelections: [String: String]
     let sectionType: PackageType
 
     let packageList: [BrewPackage]
@@ -210,7 +215,7 @@ private struct SearchResultsSection: View
                 {
                     ForEach(packageList)
                     { package in
-                        SearchResultRow(searchedForPackage: package, context: .searchResults)
+                        SearchResultRow(versionSelections: $versionSelections, searchedForPackage: package, context: .searchResults)
                     }
                 }
             } header: {

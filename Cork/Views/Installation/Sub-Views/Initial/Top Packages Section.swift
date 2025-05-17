@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopPackagesSection: View
 {
+    @Binding var versionSelections: [String: String]
     @EnvironmentObject var brewData: BrewDataStorage
 
     let packageTracker: TopPackagesTracker
@@ -42,7 +43,7 @@ struct TopPackagesSection: View
             {
                 ForEach(packages.prefix(15))
                 { topPackage in
-                    SearchResultRow(searchedForPackage: topPackage, context: .topPackages)
+                    SearchResultRow(versionSelections: $versionSelections, searchedForPackage: topPackage, context: .topPackages)
                 }
             }
         } header: {
